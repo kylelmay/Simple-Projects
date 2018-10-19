@@ -1,7 +1,5 @@
 # Simple-Projects
-A collection of simple projects for educational purposes. The things found in here can range from networking tools to games in 
-a variety of different langauages and are just intended to be hobby projects to help me better understand various mechanics, libraries, and logic
-surrounding various langauages and projects.
+A collection of simple projects I've developed for educational purposes. The things found in here can range from networking tools to games in a variety of different langauages. These projects mainly serve the purpose of improving upon my understanding of programming mechanics, langauge libraries, and methodologies, but are also designed to be fully functional applications.
 
 # Current List:
   1. Subnetting Calculator (C++)
