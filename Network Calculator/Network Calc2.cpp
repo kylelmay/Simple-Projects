@@ -31,6 +31,7 @@ i.) Advanced Mode:
 
 using namespace std;
 
+// -------------------------------------------------------- NETWORK CALCULATIONS CLASS ---------------------------------------------------------
 //IPv4 is called when entering an IPv4 address for network calculations. It contains the functions and variables associated with IPv4 addresses
 class network {
     public:
@@ -59,7 +60,8 @@ class network {
     bool error = false;           // An error is made true if an error condition is met during any calculation. If true, program exits.
 
     // Gets IP from user in a string and validates it for legal format.
-    string getUserInfo() {
+    void getUserInfo() {
+    	
         int dotCount = 0; //Count the number of '.' in the IP
 
         // Gets IP Address from User and ensures legal input
@@ -85,14 +87,16 @@ class network {
             cout << "Please Enter the number of hosts required for this network: ";
             cin >> hostQty;
         } while (hostQty < 2 && hostQty > 16777216 && cin.fail());
-
-
+        
+    // End of function getUserInfo()
     }
 
     //Separates user ip into decimal integer values then calculates octet values in binary
     int getUserIPOctets(string userIP) {
+    	cout << "Start of getUserIPOctets()" << endl;
+    	
         int dotLocation = 0;
-
+		
         //Iterates through each char in the userIP, pulls out the octets, and converts them to integers.
         for (int i = 0; i < userIP.size(); ++i) { // Once Octet4 is complete, end loop.
             // Get octet 1 from user IP and initialize
@@ -128,28 +132,31 @@ class network {
                 break;
             }
         }
-
+             
+             
         // Output Table of Octets Stacked Horizontally
-        cout << "\n" << setw(110) << setfill('-') << "" << endl;
-        cout << setw(65) << setfill(' ') << "IP INFORMATION FOR: " << userIP << endl;
-        cout << setw(110) << setfill('-') << "" << endl;
+        cout << "\n\n" << setw(110) << setfill('_') << "" << endl << endl;
+        cout << setw(60) << setfill(' ') << "IPv4 INFORMATION FOR: " << userIP << endl << endl;
 
-        cout << setfill(' ');
-        cout << "         OCTET 1      "     << "       " << "         OCTET 2      "     << "       "
-             << "         OCTET 3      " << "     " << "         OCTET 4      " << endl
-             << "--------------------------" << "  " << "--------------------------" << "  "
-             << "--------------------------" << "  " << "--------------------------" << endl
-             << setw(10) << left  << "   Decimal" << "  |" << setw(10) << right << "Binary " << "        "
-             << setw(10) << left  << " Decimal" << "|" << setw(10) << right << "Binary " << "        "
-             << setw(10) << left  << " Decimal" << "|" << setw(10) << right << "Binary " << "      "
-             << setw(10) << left  << " Decimal" << "|" << setw(10) << right << "Binary " << endl
-             << "--------------------------" << "  " << "--------------------------" << "  "
-             << "--------------------------" << "  " << "--------------------------" << endl
-             << "  "
-             << setw(10) << left << octet1 << "|" << setw(10) << right << octet1Binary << "        "
-             << setw(10) << left << octet2 << "|" << setw(10) << right << octet2Binary << "        "
-             << setw(10) << left << octet3 << "|" << setw(10) << right << octet3Binary << "      "
-             << setw(10) << left << octet4 << "|" << setw(10) << right << octet4Binary << endl;
+        cout << setw(9) << "" << setw(7) << "OCTET 1" << setw(11) << ""
+		     << setw(9) << "" << setw(7) << "OCTET 2" << setw(11) << ""
+			 << setw(9) << "" << setw(7) << "OCTET 3" << setw(11) << ""
+			 << setw(9) << "" << setw(7) << "OCTET 4" << setw(11) << "" << endl
+			 
+             << setw(25) << setfill('-') << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << endl << setfill(' ') 
+             
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << setw(5) << ""
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << setw(5) << ""
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << setw(5) << ""
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << endl << flush
+             
+             << setw(25) << setfill('-') << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << endl << setfill(' ');
+             
+        cout << setw(2) << "" << setw(10) << left  << octet1 << "|" << setw(10) << right << octet1Binary << setw(4) << ""
+             << setw(2) << "" << setw(10) << left  << octet2 << "|" << setw(10) << right << octet2Binary << setw(4) << ""
+             << setw(2) << "" << setw(10) << left  << octet3 << "|" << setw(10) << right << octet3Binary << setw(4) << ""
+             << setw(2) << "" << setw(10) << left  << octet4 << "|" << setw(10) << right << octet4Binary << setw(4) << "" << endl << endl;
+             
     }
 
     // Initializes class value based on octet1
@@ -170,14 +177,12 @@ class network {
             else {
                 ipType = "Public";
             }
-            cout << setw(110) << setfill('-') << "" << endl;
-            cout << setw(58) << setfill(' ') << "CLASS: " << classIP << " " << ipType << endl;
-            cout << setw(110) << setfill('-') << "" << endl;
             return 0;
         }
         else if (octet1 == 127) {
             classIP = '0';
-            cout << "Octet 127.0.0.0 - 127.255.255.255 is reserved for loop-back addresses and cannot be used. Goodbye." << endl;
+            cout << "\n\n" << setw(60) << "\tERROR!\n\n"
+                 << "The IPv4 range of 127.0.0.0 - 127.255.255.255 is reserved for loop-back addresses and cannot be subnetted. Goodbye." << endl;
             error = true;
             return 1;
         }
@@ -189,9 +194,6 @@ class network {
             else {
                 ipType = "Public";
             }
-            cout << setw(110) << setfill('-') << "" << endl;
-            cout << setw(58) << setfill(' ') << "CLASS: " << classIP << " " << ipType << endl;
-            cout << setw(110) << setfill('-') << "" << endl;
             return 0;
         }
         else if (octet1 <=223) {
@@ -202,9 +204,6 @@ class network {
             else {
                 ipType = "Public";
             }
-            cout << setw(110) << setfill('-') << "" << endl;
-            cout << setw(58) << setfill(' ') << "CLASS: " << classIP << " " << ipType << endl;
-            cout << setw(110) << setfill('-') << "" << endl;
             return 0;
         }
         else {
@@ -215,7 +214,7 @@ class network {
         return classIP;
     }
 
-    // --------------------------------- SUBNET DIVIDER -------------------------------------------------
+    // --------------------------------- SUBNET CALCULATIONS DIVIDER ----------------------------------------------------------------
 
     vector <int> CIDR_VALUES {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
     vector <int> HOST_POWERS {31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2};
@@ -441,55 +440,52 @@ class network {
         }
 
         // Output Table of Octets Stacked Horizontally
-        cout << "\n\n" << setw(110) << setfill('-') << "" << endl;
-        cout << setw(65) << setfill(' ') << "SUBNET MASK INFORMATION FOR: " << subnetMask << endl;
-        cout << setw(110) << setfill('-') << "" << endl;
-        cout << setfill(' ')
-             << "         OCTET 1      "     << "       " << "         OCTET 2      "     << "       "
-             << "         OCTET 3      " << "     " << "         OCTET 4      " << endl
-             << "--------------------------" << "  " << "--------------------------" << "  "
-             << "--------------------------" << "  " << "--------------------------" << endl
-             << setw(10) << left  << "   Decimal" << "  |" << setw(10) << right << "Binary " << "        "
-             << setw(10) << left  << " Decimal" << "|" << setw(10) << right << "Binary " << "        "
-             << setw(10) << left  << " Decimal" << "|" << setw(10) << right << "Binary " << "      "
-             << setw(10) << left  << " Decimal" << "|" << setw(10) << right << "Binary " << endl
-             << "--------------------------" << "  " << "--------------------------" << "  "
-             << "--------------------------" << "  " << "--------------------------" << endl
-             << "  "
-             << setw(10) << left << subnetOctet1 << "|" << setw(10) << right << subnetOctet1Binary << "        "
-             << setw(10) << left << subnetOctet2 << "|" << setw(10) << right << subnetOctet2Binary << "        "
-             << setw(10) << left << subnetOctet3 << "|" << setw(10) << right << subnetOctet3Binary << "      "
-             << setw(10) << left << subnetOctet4 << "|" << setw(10) << right << subnetOctet4Binary << endl;
-        cout << setw(110) << setfill('-') << "" << endl; // End
-        cout << setw(58) << setfill(' ') << "CIDR NOTATION: " << networkID << endl;
-        cout << setw(110) << setfill('-') << "" << endl;
+        cout  << setw(110) << setfill('_') << "" << endl << endl;
+        cout  << setw(57) << setfill(' ') << "SUBNET MASK INFORMATION FOR: " << subnetMask << setw(10) << "CIDR /" << CIDR << endl << endl;
+
+        cout << setw(9) << "" << setw(7) << "OCTET 1" << setw(11) << ""
+		     << setw(9) << "" << setw(7) << "OCTET 2" << setw(11) << ""
+			 << setw(9) << "" << setw(7) << "OCTET 3" << setw(11) << ""
+			 << setw(9) << "" << setw(7) << "OCTET 4" << setw(11) << "" << endl
+			 
+             << setw(25) << setfill('-') << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << endl << setfill(' ') 
+             
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << setw(5) << ""
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << setw(5) << ""
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << setw(5) << ""
+             << setw(2) << "" << setw(10) << left  << "Decimal" << "|" << setw(9) << right << "Binary" << endl
+             
+             << setw(25) << setfill('-') << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << "  " << setw(25) << "" << endl << setfill(' ');
+             
+        cout << setw(2) << "" << setw(10) << left  << subnetOctet1 << "|" << setw(10) << right << subnetOctet1Binary << setw(4) << ""
+             << setw(2) << "" << setw(10) << left  << subnetOctet2 << "|" << setw(10) << right << subnetOctet2Binary << setw(4) << ""
+             << setw(2) << "" << setw(10) << left  << subnetOctet3 << "|" << setw(10) << right << subnetOctet3Binary << setw(4) << ""
+             << setw(2) << "" << setw(10) << left  << subnetOctet4 << "|" << setw(10) << right << subnetOctet4Binary << setw(4) << "" << endl;
+             
+        cout << setw(110) << setfill('_') << "" << endl;
 
         return 0;
     }
-    //-------------------------------------------- BINARY CONVERSIONS ----------------------------------------------------------------------------------------
-
-
 
     // ------------------------------------------- PRINT FINAL VALUES ----------------------------------------------------------------------------------------
     void printFinal() {
 
         cout << setfill(' ') << endl
-             << setw(20) << left << "IP Address: " << setw(20) << userIP << octet1Binary <<  "." << octet2Binary << "." << octet3Binary << "." << octet4Binary << endl
-             << setw(20) << left << "Netmask: " << setw(20) << subnetMask << subnetOctet1Binary <<  "." << subnetOctet2Binary << "." << subnetOctet3Binary << "." << subnetOctet4Binary << endl
-             //<< setw(15) << left << "Wildcard:" << setw(20) << wildcard << binaryWildcard << endl
-             << setw(20) << left << "Network: " << setw(20) << networkID << networkIDBinary << " (Class " << classIP << ")" << endl
-        //   << setw(10) << left << "Broadcast: " << setw(30) << broadcastIP << " " << setw(20) << right << binaryBroadcastAddress <<  endl
-        //   << setw(10) << left << "HostMin: " << setw(30) << hostMinIP << " " << setw(20) << right << binaryNetworkAddress <<  endl
-        //   << setw(10) << left << "HostMax: " << setw(30) << hostMaxIP << " " << setw(20) << right << binaryNetworkAddress <<  endl */
-             << setw(20) << left << "Net Increment: " << networkIncrement << endl
-             << setprecision(12) << setw(15) << left << "Hosts/Net: " << maxHosts << endl;
+             << setw(22) << left << " IP Address: " << setw(20) << userIP << octet1Binary <<  "." << octet2Binary << "." << octet3Binary << "." << octet4Binary << endl
+             << setw(22) << left << " Netmask: " << setw(20) << subnetMask << subnetOctet1Binary <<  "." << subnetOctet2Binary << "." << subnetOctet3Binary << "." << subnetOctet4Binary << endl
+           //<< setw(22) << left << " Wildcard:" << setw(20) << wildcard << binaryWildcard << endl
+             << setw(22) << left << " Network: " << setw(20) << networkID << networkIDBinary << " (Class " << classIP << " " << ipType << ")" << endl
+             << setw(22) << left << " Network Boundary " << "Octet " << networkBoundary << endl
+        //   << setw(22) << left << " HostMin: " << setw(30) << hostMinIP << " " << setw(20) << right << binaryNetworkAddress <<  endl
+        //   << setw(22) << left << " HostMax: " << setw(30) << hostMaxIP << " " << setw(20) << right << binaryNetworkAddress <<  endl */
+             << setw(22) << left << " Network Increment: " << networkIncrement << endl
+             << setw(22) << left << " Hosts/Net: " << setprecision(12) << maxHosts << endl;
 
         if (networkBoundary == 3) {
             cout << endl << endl;
             cout << setw(7) << left << "NET #" <<setw(20) << "NETWORK ADDRESS" << setw(35) << "HOST IPV4 RANGE" << setw(15) << "BROADCAST ADDRESS" << endl;
             cout << setw(79) << setfill('_') << "" << endl;
             cout << setfill (' ');
-            cout << "Net Boundary = " << networkBoundary << endl;
             for (int i = 0; i < subnetQty; i++) {
                 subnetOctet = broadcastOctet + 1;
                 broadcastOctet = (subnetOctet + networkIncrement) - 1;
@@ -575,12 +571,13 @@ class network {
 };
 // Subnet is called when the user requests a subnet scheme based on the number of hosts they require per network. It finds the first applicable subnet.
 
+//------------------------------------------------------------ MAIN FUNCTION --------------------------------------------------------
 // Main provides options for running various sub functions
 int main () {
     char version;
     cout << "Network Calculator  |  Version: 0.6\n" << endl
          << "Author: Kyle May" << endl
-         << "Last Update: 10/11/2018\n" << endl
+         << "Last Update: 11/04/2018\n" << endl
          << "Features of Network Calculator:" << endl
          << setw(60) << setfill('-') << "" <<endl
          << "a.) Takes a user's IP Address" << endl
@@ -622,21 +619,21 @@ int main () {
             cout << "Function getUserInfo failed. Ending program.";
             return 1;
         }
-
+        
         // Separate the string IPv4 into it's specific integer and binary octet values, then print them to the console
         myNet.getUserIPOctets(myNet.userIP);
         if (myNet.error == true){
             cout << "Function getOctets failed. Ending program.";
             return 1;
         }
-
+		
         // Get class of IP;
         myNet.getClass();
         if (myNet.error == true){
             cout << "Failed to get network classification. Ending program.";
             return 1;
         }
-
+		
         // Based on the class, required hosts, required networks, and IP Address, calculates the subnet and network details
         myNet.startSubnetting();
         if (myNet.error == true){
@@ -657,6 +654,6 @@ int main () {
             cout << "Failed to print network information to the console. Ending program.";
             return 1;
         }
-
+// ------------------------------------------------------- END OF PROGRAM --------------------------------------------------
 return 0;
 }
