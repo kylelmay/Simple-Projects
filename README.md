@@ -5,4 +5,3 @@ A collection of simple projects I've developed for educational purposes. The thi
   1. Subnetting Calculator (C++)
   2. Pong Web Game (JS, HTML)
   3. Breakout Web Game (JS, HTML)
-  4. Keylogger (C++, Powershell)
