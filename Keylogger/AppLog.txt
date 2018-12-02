@@ -1,0 +1,36 @@
+[02.12.2018 01:24:59]
+Hook started... Timer started
+
+[02.12.2018 01:25:33]
+<From SendMain> Return code: 7
+
+[02.12.2018 02:34:49]
+Hook started... Timer started
+
+[02.12.2018 02:35:12]
+Hook started... Timer started
+
+[02.12.2018 02:35:22]
+<From SendMain> Return code: 7
+
+[02.12.2018 02:35:45]
+<From SendMain> Return code: 7
+
+[02.12.2018 02:39:59]
+Hook started... Timer started
+
+[02.12.2018 02:40:32]
+<From SendMain> Return code: 7
+
+[02.12.2018 02:59:18]
+Hook started... Timer started
+
+[02.12.2018 03:00:56]
+Hook started... Timer started
+
+[02.12.2018 03:01:59]
+<From SendMain> Return code: 7
+
+[02.12.2018 03:05:59]
+Hook started... Timer started
+

@@ -1,0 +1,75 @@
+# depslib dependency file v1.0
+1543696486 source:c:\users\kylel\desktop\me\github\keylogger\keylogger\main.cpp
+	<iostream>
+	<windows.h>
+	"Helper.h"
+	"KeyConstants.h"
+	"Base64.h"
+
+1543697670 c:\users\kylel\desktop\me\github\keylogger\keylogger\helper.h
+	<ctime>
+	<string>
+	<sstream>
+	<fstream>
+
+1543697958 c:\users\kylel\desktop\me\github\keylogger\keylogger\keyconstants.h
+	<map>
+	<string>
+
+1543698162 c:\users\kylel\desktop\me\github\keylogger\keylogger\base64.h
+	<vector>
+	<string>
+
+1543731894 source:c:\users\kylel\desktop\me\github\keylogger\main.cpp
+	<iostream>
+	<windows.h>
+	"KeyConstants.h"
+	"Helper.h"
+	"Base64.h"
+	"IO.h"
+	"Timer.h"
+	"SendMail.h"
+	"KeyHook.h"
+
+1543731891 c:\users\kylel\desktop\me\github\keylogger\helper.h
+	<ctime>
+	<string>
+	<sstream>
+	<fstream>
+
+1543731891 c:\users\kylel\desktop\me\github\keylogger\keyconstants.h
+	<map>
+	<string>
+
+1543737640 c:\users\kylel\desktop\me\github\keylogger\base64.h
+	<vector>
+	<string>
+
+1543731891 c:\users\kylel\desktop\me\github\keylogger\io.h
+	<string>
+	<cstdlib>
+	<fstream>
+	"windows.h"
+	"Helper.h"
+	"Base64.h"
+
+1543731891 c:\users\kylel\desktop\me\github\keylogger\timer.h
+	<thread>
+	<chrono>
+
+1543731890 c:\users\kylel\desktop\me\github\keylogger\sendmail.h
+	<fstream>
+	<vector>
+	"windows.h"
+	"IO.h"
+	"Timer.h"
+	"Helper.h"
+
+1543737948 c:\users\kylel\desktop\me\github\keylogger\keyhook.h
+	<iostream>
+	<fstream>
+	"windows.h"
+	"KeyConstants.h"
+	"Timer.h"
+	"SendMail.h"
+
